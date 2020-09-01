@@ -16,7 +16,7 @@ public class Readability {
         this.text = text;
     }
 
-    //calculate words
+
     public int countWords() {
         return this.wordCount;
     }
@@ -29,6 +29,7 @@ public class Readability {
         return this.sentenceCount;
     }
 
+    //calculate words in the text
     private void getWordCount() {
         int counter = 1;
         for (int i = 0; i < this.text.length(); i++) {
@@ -39,6 +40,7 @@ public class Readability {
         wordCount = counter;
     }
 
+    //calculate how many letters in the text
     private void getLetterCount() {
         int counter = 0;
         for(int i = 0; i < this.text.length(); i++) {
@@ -49,6 +51,7 @@ public class Readability {
         this.letterCount = counter;
     }
 
+    //calculate how many sentences in the text
     private void getSentenceCount() {
         int counter = 0;
         for(int i = 0; i < this.text.length(); i++) {
