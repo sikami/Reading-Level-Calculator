@@ -74,9 +74,9 @@ public class Readability {
         float letter = (float) countLetter();
 
         //calculate average level of Letter
-        float averageLetter = (letter / words) * 100;
-        float averageSentence = (sentence / words) * 100;
-        float readingLevel = (float) 0.0588 * averageLetter * averageSentence - (float) 15.8;
+        float averageLetter = letter / words * 100;
+        float averageSentence = sentence / words * 100;
+        float readingLevel = (float) 0.0588 * averageLetter - (float) 0.296 * averageSentence - (float) 15.8;
         this.readingLevelResult = readingLevel;
     }
 
@@ -85,12 +85,12 @@ public class Readability {
         if(round(readingLevelResult) >= 16) {
             System.out.println(readingLevelResult);
             System.out.println("Grade 16+");
-        } else if (readingLevelResult < 1) {
-            System.out.println(readingLevelResult);
+        } else if (round(readingLevelResult) < 1) {
+            System.out.println(round(readingLevelResult));
             System.out.println("Before Grade 1");
         } else {
-            System.out.println(readingLevelResult);
-            System.out.format("Grade %0.f", round(readingLevelResult));
+            System.out.println(round(readingLevelResult));
+            System.out.format("Grade %d", round(readingLevelResult));
         }
     }
 
