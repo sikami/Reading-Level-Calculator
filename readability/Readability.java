@@ -9,10 +9,10 @@ public class Readability {
     //calculate letters, words, sentence
 
     private String text;
-    private int wordCount = 0;
-    private int letterCount = 0;
-    private int sentenceCount = 0;
-    private float readingLevelResult = 0;
+    private int wordCount;
+    private int letterCount;
+    private int sentenceCount;
+    private float readingLevelResult;
 
     public Readability(String text) {
         this.text = text;
@@ -81,11 +81,15 @@ public class Readability {
     }
 
     public void resultReadingLevel() {
+        getReadingLevel();
         if(round(readingLevelResult) >= 16) {
+            System.out.println(readingLevelResult);
             System.out.println("Grade 16+");
-        } else if (round(readingLevelResult) < 1) {
+        } else if (readingLevelResult < 1) {
+            System.out.println(readingLevelResult);
             System.out.println("Before Grade 1");
         } else {
+            System.out.println(readingLevelResult);
             System.out.format("Grade %0.f", round(readingLevelResult));
         }
     }
