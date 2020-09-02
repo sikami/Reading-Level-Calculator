@@ -1,6 +1,7 @@
 package readability;
 
 import static java.lang.Character.isLetter;
+import static java.lang.StrictMath.round;
 
 public class Readability {
 
@@ -11,21 +12,22 @@ public class Readability {
     private int wordCount = 0;
     private int letterCount = 0;
     private int sentenceCount = 0;
+    private float readingLevelResult = 0;
 
     public Readability(String text) {
         this.text = text;
     }
 
 
-    public int countWords() {
+    private int countWords() {
         return this.wordCount;
     }
 
-    public int countLetter() {
+    private int countLetter() {
         return this.letterCount;
     }
 
-    public int countSentence() {
+    private int countSentence() {
         return this.sentenceCount;
     }
 
@@ -37,7 +39,7 @@ public class Readability {
                 counter++;
             }
         }
-        wordCount = counter;
+        this.wordCount = counter;
     }
 
     //calculate how many letters in the text
@@ -59,7 +61,33 @@ public class Readability {
                 counter++;
             }
         }
-        sentenceCount = counter;
+        this.sentenceCount = counter;
+    }
+
+    private void getReadingLevel() {
+        getSentenceCount();
+        getWordCount();
+        getLetterCount();
+
+        float sentence = (float) countSentence();
+        float words = (float) countWords();
+        float letter = (float) countLetter();
+
+        //calculate average level of Letter
+        float averageLetter = (letter / words) * 100;
+        float averageSentence = (sentence / words) * 100;
+        float readingLevel = (float) 0.0588 * averageLetter * averageSentence - (float) 15.8;
+        this.readingLevelResult = readingLevel;
+    }
+
+    public void resultReadingLevel() {
+        if(round(readingLevelResult) >= 16) {
+            System.out.println("Grade 16+");
+        } else if (round(readingLevelResult) < 1) {
+            System.out.println("Before Grade 1");
+        } else {
+            System.out.format("Grade %0.f", round(readingLevelResult));
+        }
     }
 
 }
